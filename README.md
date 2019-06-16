@@ -4,7 +4,7 @@
 
 1. 下載Mininet VM
 2. windows照助教講義下載xterm，mac OS可用xquartz，然後ssh -Y連VM
-   [This link](https://www.xquartz.org)
+   [link](https://www.xquartz.org)
 3. 下載code
 
 ## example
