@@ -45,6 +45,7 @@
 * 會向agent發出註冊申請，註冊後成為被client puzzle保護的server
 * 可以打指令向agent發送請求:
 	1.	open port:X, Y
+	
 		X: port number, Y: 可允許最大連線數
 	2.	close port:X
 	3.	df, src_ip, src_port, dst_port
