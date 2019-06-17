@@ -17,7 +17,7 @@
 6. h2: python server.py，server預設會架在port 6666，為簡單的echo server
 7. h1: python agent.py，最後跑
 8. 等到h2出現register和open port: 6666, 20，表示server向controller註冊成功
-9. h1此時應該已經有dump file: solved_ans003.json，表示該次client puzzle已solved，press Enter
+9. h1此時應該已經有顯示solved，表示該次client puzzle已solved，press Enter
 10. h1連線的dst應為h2的server，press Enter
 11. h1連線成功後可以連上h2的echo server，exit可離開
 
