@@ -205,19 +205,20 @@ class SimpleSwitch13(app_manager.RyuApp):
             print "{} -> {}".format(pkt_ipv4.src, pkt_ipv4.dst)
         if pkt_tcp and (pkt_ipv4.dst, pkt_tcp.dst_port) in self.server:
             t = pkt_tcp.option
-            dst = (pkt_ipv4.dst, pkt_tcp.dst_port)
-            src = (pkt_ipv4.src, pkt_tcp.src_port)
+            my_dst = (pkt_ipv4.dst, pkt_tcp.dst_port)
+            my_src = (pkt_ipv4.src, pkt_tcp.src_port)
             print "option", t
-            channel = self.check(t, self.server[dst][0])
+            valid = False
+            channel = self.check(t, self.server[my_dst][0])
             if channel:
                 for c in channel:
-                    if self.channel[dst][c] < self.server[dst][1] / self.channel_num:
-                        self.channel[dst][c] += 1
-                        self.cn2ch[(src, dst)] = c
+                    if self.channel[my_dst][c] < self.server[my_dst][1] / self.channel_num:
+                        self.channel[my_dst][c] += 1
+                        self.cn2ch[(my_src, my_dst)] = c
                         valid = True
                         break
         if pkt_udp and pkt_ipv4:
-            print "{}:{} -> {}:{}".format(pkt_ipv4.src, pkt_udp.src_port, pkt_ipv4.dst, pkt_udp.dst_port)
+            print "udp, {}:{} -> {}:{}".format(pkt_ipv4.src, pkt_udp.src_port, pkt_ipv4.dst, pkt_udp.dst_port)
 
         print "valid =", valid
         print "channel", self.channel

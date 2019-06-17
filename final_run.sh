@@ -1,3 +1,4 @@
+rm -f *.json *.log
 if [ $# != 1 ]&&[ $# != 2 ]
 then
 	echo "Usage: 0/1 [file]"
@@ -6,7 +7,7 @@ then
 	echo "The default file is final_topo.py or final_ryu.py"
 	exit
 fi
-rm -f *.json *.log
+
 if [ $# == 2 ]
 then
 	f=$2
@@ -18,7 +19,8 @@ else
 		f="./final_ryu.py"
 	fi
 fi
-if [ $1 == "0" ]
+
+if [ $1 == 0 ]
 then
 	sudo -E mn --custom $f --topo=mytopo --mac --switch=ovsk,protocols=OpenFlow13 --controller remote
 else
