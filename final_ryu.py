@@ -138,7 +138,8 @@ class SimpleSwitch13(app_manager.RyuApp):
         self.add_flow(datapath, 0, match1, actions)
         self.add_flow(datapath, 100, match2, actions)
         self.add_flow(datapath, 97, match3, [])
-        self.add_flow(datapath, 98, match4, actions)
+        flood = [parser.OFPActionOutput(ofproto.OFPP_FLOOD)]
+        self.add_flow(datapath, 98, match4, flood)
         #add
         for ip, port in self.server:
             match2 = parser.OFPMatch(eth_type=ether_types.ETH_TYPE_IP, ip_proto=in_proto.IPPROTO_TCP, ipv4_dst=ip, tcp_dst=port)
@@ -247,7 +248,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                 match1 = parser.OFPMatch(in_port=in_port, eth_dst=dst)
                 match2 = parser.OFPMatch(eth_type=ether_types.ETH_TYPE_IP, ip_proto=in_proto.IPPROTO_UDP, in_port = 1, udp_dst=8888)
                 self.add_flow(datapath, 1, match1, actions)
-                self.add_flow(datapath, 99, match2, actions)
+                #self.add_flow(datapath, 99, match2, actions)
 
 
         data = None

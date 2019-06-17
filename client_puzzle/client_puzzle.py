@@ -89,7 +89,8 @@ class Client_puzzle():
         except:
             return False
         if self.NOW_T==self.PUZ['time']:
-            return False
+            #here
+            return True
 
         self.NOW_T=self.PUZ['time']
         tmp_dict=self.available_ans["prev"]
@@ -238,7 +239,7 @@ class Client_puzzle():
             return True, ans_list
         else:
             return False, None
-
+'''
 if __name__=='__main__':
     ## below is test ##
     
@@ -274,7 +275,7 @@ if __name__=='__main__':
         print A.load_client_puzzle()
         A.random_solve()
         print [items['ans'] for (key,items) in A.available_ans.items() if items.get('ans')!=None]
-    '''
+    
     ## below is cheat file if you have client puzzle's solution
     ## only load cheat file , not matching (may be out-of-date)
     print A.load_cheat_file()

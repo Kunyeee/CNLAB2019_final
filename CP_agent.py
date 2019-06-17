@@ -19,8 +19,9 @@ class CP_agent():
         while True:
             if self.A.load_client_puzzle():
                 self.A.random_solve()
-                self.A.dump_ans_file()
-                print "dump file:", 'solved_ans' + self.idx + '.json'
+                #self.A.dump_ans_file()
+                #print "dump file:", 'solved_ans' + self.idx + '.json'
+                print "solved"
                 break
             else:
                 time.sleep(1)
@@ -82,11 +83,11 @@ class CP_agent():
                 idx = s[1]
                 break
         f.close()
-        print idx
-        if idx < 0:
-            return "host did't register"
-        #self.A.load_ans_file()
+        print "in get puzzle, idx=", idx
+        if int(idx) < 0:
+            return "host didn't register"
         while True:
+            #self.A.load_ans_file()
             res, pl = self.A.get_append_bytes(idx)
             if res:
                 return str(pl[0][0]) + ',' + str(pl[0][1]) + ',' + str(pl[1][0]) + ',' + str(pl[1][1])

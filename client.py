@@ -8,6 +8,13 @@ import os
 from argparse import ArgumentParser
 from CP_agent import *
 
+parser = ArgumentParser(usage= '[-h] [-sp SP] [-dp DP] [-dip DIP] [-dt DT]')
+parser.add_argument("-sp", default=str(random.randint(5000, 20000)), dest= "sp", help= "src port")
+parser.add_argument("-dp", default='6666', dest= "dp", help= "dst port")
+parser.add_argument("-dip", default='10.0.0.2', dest= "dip", help= "dst ip")
+parser.add_argument("-dt", default='default', dest= "dt", help= "client_puzzle data, automatically generates by default")
+args = parser.parse_args()
+
 my_ip = os.popen('ifconfig').read().split('inet addr:')[1].split(' ')[0]
 idx = my_ip.split('.')[-1].rjust(3, '0')
 outdir = './client_puzzle/'
@@ -20,11 +27,6 @@ _port_dst = 6666
 _seq = random.randint(0, 10000000)
 _port = random.randint(5000, 20000)
 
-parser = ArgumentParser(usage= '[-h] [-sp SP] [-dp DP] [-dip DIP] [-dt DT]')
-parser.add_argument("-sp", default=str(random.randint(5000, 20000)), dest= "sp", help= "src port")
-parser.add_argument("-dp", default='6666', dest= "dp", help= "dst port")
-parser.add_argument("-dip", default='10.0.0.2', dest= "dip", help= "dst ip")
-parser.add_argument("-dt", default='default', dest= "dt", help= "default using correct client_puzzle data")
 
 while True:
     parser.print_help()
@@ -36,7 +38,7 @@ while True:
             args =parser.parse_args(cmd)
             break
         except:
-            a = 1
+            None
 
     _port = int(args.sp)
     dp = int(args.dp)

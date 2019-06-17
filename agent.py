@@ -9,6 +9,7 @@ import select, errno
 import random
 import sys, os, subprocess
 import time
+from argparse import ArgumentParser
 
 logger = logging.getLogger("agent")
 server = {}
@@ -121,6 +122,14 @@ def InitLog():
 
 
 if __name__ == "__main__":
+    parser = ArgumentParser()
+    parser.add_argument("-d", default='4', dest='d', help='difficulty of client puzzle, range(0, 10)')
+    parser.add_argument("-t", default='30', dest='t', help='puzzle update time interval')
+    args =parser.parse_args()
+    my_d = args.d
+    my_t = int(args.t)
+
+
     InitLog()
     for i in range(1, 1 + Max_server_num):
         server_id[i] = None
@@ -133,7 +142,7 @@ if __name__ == "__main__":
         #subprocess.call(['python', outdir + 'generate_server_key.py', '-i', outdir, '-o', outdir])
         while True:
             #call function
-            subprocess.call(['python', outdir + 'generate_puzzle.py', '-i', outdir, '-o', outdir, '-s', '1', '-l', '5'])
+            subprocess.call(['python', outdir + 'generate_puzzle.py', '-i', outdir, '-o', outdir, '-s', '1', '-l', my_d])
             f = open(outdir + 'puzzle.json')
             cnt = 0
             while True:
@@ -150,7 +159,7 @@ if __name__ == "__main__":
                 sendp(packet)
                 cnt += 1
                 print "send"
-            time.sleep(60)
+            time.sleep(my_t)
 
     try:
         # 創建TCPsocket 作為監聽 socket

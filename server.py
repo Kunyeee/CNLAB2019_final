@@ -36,6 +36,14 @@ def InitLog():
 if __name__ == "__main__":
     #if os.fork() == 0:
     #    os.execl('/usr/bin/python', 'python', './recver.py')
+    parser = ArgumentParser()
+    parser.add_argument("-bp", default="6666", dest= "bp", help= "port connected to client") 
+    parser.add_argument("-cp", default="5555", dest= "cp", help= "port connected to agent") 
+    
+    args =parser.parse_args()
+    bp = int(args.bp)
+    cp = int(args.cp)
+
     my_ip = os.popen('ifconfig').read().split('inet addr:')[1].split(' ')[0]
     idx = my_ip.split('.')[-1].rjust(3, '0')
     outdir = './client_puzzle/'
@@ -43,21 +51,16 @@ if __name__ == "__main__":
     T = CP_agent(my_ip, idx, outdir, True)
     #thread.start_new_thread(recver, (my_ip, idx, A, True, ))
 
-    parser = ArgumentParser()
-    parser.add_argument("-bp", default=6666, dest= "bp", help= "server binding port") 
-    parser.add_argument("-cp", default=5555, dest= "cp", help= "port connected to agent") 
-    
-    args =parser.parse_args()
-    bp = int(args.bp)
-    cp = int(args.cp)
+ 
     InitLog()
     #register
     
     payload = T.get_puzzle(agent_server[0] + ':' + str(agent_server[1]))
-    print payload
-    packet = IP(dst="10.0.0.1")/TCP(sport=cp, dport=6666, options = [(254, payload)])
+    print "payload =", payload
+    packet = IP(dst="10.0.0.1", src=my_ip)/TCP(sport=cp, dport=6666, options = [(254, payload)])
     send(packet)
     s = socket.socket()
+    s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
     s.bind((my_ip, cp))
     s.connect(agent_server)
     s.send('register')
