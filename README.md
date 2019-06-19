@@ -3,23 +3,29 @@
 ## 環境
 
 1. 下載Mininet VM
-2. windows照助教講義下載xterm，mac OS可用xquartz，然後ssh -Y連VM
-   [link](https://www.xquartz.org)
-3. 下載code
+2. 下載code
 
 ## example
 
-1. 開兩個視窗
-2. A 視窗 ./final_run.sh 0 跑Mininet
-3. B 視窗 ./final_run.sh 1 跑controller
-4. A: xterm h1 h2 h3
-5. h3: python client.py，
-6. h2: python server.py，server預設會架在port 6666，為簡單的echo server
-7. h1: python agent.py，最後跑
-8. 等到h2出現register和open port: 6666, 20，表示server向controller註冊成功
-9. h1此時應該已經有顯示solved，表示該次client puzzle已solved，press Enter
-10. h1連線的dst應為h2的server，press Enter
-11. h1連線成功後可以連上h2的echo server，exit可離開
+```
+# start SDN controller
+PYTHONPATH=. ryu-manager final_ryu.py 
+
+# start mininet and experiment controller 
+python3 net.py -n 10 -o tmp
+
+# run experients
+> server h2
+> agent h1
+> client h3 h2
+> attacker h4 h10 h2
+
+# see outputs
+agent:    tail -f tmp/h1.out
+server:   tail -f tmp/h2.out
+client:   tail -f tmp/h3.out
+attacker: tail -f tmp/h4.out
+```
 
 ## 細節
 
