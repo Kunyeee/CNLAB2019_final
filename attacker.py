@@ -14,7 +14,7 @@ def main(args):
 
     host_idx = args.ip.split('.')[-1].rjust(3, '0')
     puzzle_dir = 'client_puzzle/'
-    puzzle_agent = CP_agent(args.ip, host_idx, puzzle_dir, False)
+    puzzle_agent = CP_agent(args.ip, host_idx, puzzle_dir, True)
 
     solved_puzzle = puzzle_agent.get_puzzle('{}:{}'.format(args.target_ip, args.target_port))
     packet = IP(
