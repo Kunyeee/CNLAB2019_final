@@ -37,6 +37,7 @@ if __name__ == "__main__":
     #if os.fork() == 0:
     #    os.execl('/usr/bin/python', 'python', './recver.py')
     parser = ArgumentParser()
+    parser.add_argument("-ip", type=str, required=True, dest= "ip", help= "ip") 
     parser.add_argument("-bp", default="6666", dest= "bp", help= "port connected to client") 
     parser.add_argument("-cp", default="5555", dest= "cp", help= "port connected to agent") 
     
@@ -44,7 +45,8 @@ if __name__ == "__main__":
     bp = int(args.bp)
     cp = int(args.cp)
 
-    my_ip = os.popen('ifconfig').read().split('inet addr:')[1].split(' ')[0]
+    #my_ip = os.popen('ifconfig').read().split('inet addr:')[1].split(' ')[0]
+    my_ip = args.ip
     idx = my_ip.split('.')[-1].rjust(3, '0')
     outdir = './client_puzzle/'
 
@@ -98,7 +100,7 @@ if __name__ == "__main__":
         # 向 epoll 句柄中註冊 監聽 socket 的 可讀 事件
         epoll_fd.register(listen_fd.fileno(), select.EPOLLIN)
         # register stdin
-        epoll_fd.register(STDIN, select.EPOLLIN)
+        #epoll_fd.register(STDIN, select.EPOLLIN)
     except select.error as  msg:
         logger.error(msg)
 
