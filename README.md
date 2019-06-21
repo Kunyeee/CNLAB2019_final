@@ -35,6 +35,14 @@ attacker: tail -f tmp/h4.out
   就新增一條rule，之後同(ip, port) -> (ip, port)的tcp封包就正常移動，不轉送controller檢查
 * 由agent告知與server相關的訊息，或是刪除rule等等
 
+### net.py
+
+* 可以統一執行server.py，agent.py，client.py和attacker.py
+* server.py [host]
+* agent.py [host]
+* client.py [client_host] [server_host]
+* attacker.py [attacker_host_start] [attacker_host_end] [server_host]
+
 ### agent.py
 
 * 要使用client puzzle服務的server向agent註冊，會和agent建立tcp連線管理server和client的連線狀態
