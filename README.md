@@ -41,14 +41,14 @@ attacker: tail -f tmp/h4.out
 * server也使用client puzzle向agent溝通
 * agent會適度檢查server傳來的訊息合法性
 
-### client.py
+### client_auto.py
 
-* 有很爛的參數介紹，可以指定src, dst的ip, port，可以指定是否要用client puzzle。不用照理說會被block住
-* 上述11點exit後可以再對別的server連線
+* 可以指定src, dst的ip, dst port預設為6666，可以指定是否要用client puzzle。不用照理說會被block住
 
 ### server.py
 
 * 會向agent發出註冊申請，註冊後成為被client puzzle保護的server
+* 本身是echo server，預設聽在port 6666
 * 可以打指令向agent發送請求:
 	1.	open port:X, Y
 	
@@ -56,7 +56,3 @@ attacker: tail -f tmp/h4.out
 	2.	close port:X
 	3.	df, src_ip, src_port, dst_port
 		向agent刪除該連線，agent檢查合法後會轉送給controller刪除該條rule
-
-### BUG
-
-bug應該很多xD，要做其他功能再加，詳細敘述待補
