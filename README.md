@@ -38,10 +38,10 @@ attacker: tail -f tmp/h4.out
 ### net.py
 
 * 可以統一執行server.py，agent.py，client.py和attacker.py
-* server.py [host]
-* agent.py [host]
-* client.py [client_host] [server_host]
-* attacker.py [attacker_host_start] [attacker_host_end] [server_host]
+* server [host]
+* agent [host]
+* client [client_host] [server_host]
+* attacker [attacker_host_start] [attacker_host_end] [server_host]
 
 ### agent.py
 
