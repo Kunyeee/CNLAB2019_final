@@ -51,7 +51,8 @@ attacker: tail -f tmp/h4.out
 
 ### client_auto.py
 
-* 可以指定src, dst的ip, dst port預設為6666，可以指定是否要用client puzzle。不用照理說會被block住
+* 會定期的向server傳訊息
+* 可用來偵測在attacker攻擊時是否仍有辦法和server連線
 
 ### server.py
 
