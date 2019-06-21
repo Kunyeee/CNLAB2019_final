@@ -1,6 +1,6 @@
 generate_server_key.py 可生成公鑰私鑰對 
-generate_puzzle.py 可生成puzzle.json
-sever_puzzle.py 函數可用給server做驗證
-client_puzzle.py 有函數可用給client load puzzle或是solve puzzle等等
+generate_puzzle.py 可生成puzzle
+sever_puzzle.py  有函數可提供server載入新puzzle或是驗證當前puzzle等等
+client_puzzle.py 有函數可提供client載入新puzzle或是解開當前puzzle等等
 
 
